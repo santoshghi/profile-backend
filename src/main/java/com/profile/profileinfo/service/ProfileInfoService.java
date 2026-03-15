@@ -6,6 +6,7 @@ import com.profile.profileinfo.dto.response.ProfileInfoResponse;
 import com.profile.profileinfo.entity.ProfileInfo;
 import com.profile.profileinfo.mapper.ProfileInfoMapper;
 import com.profile.profileinfo.repository.ProfileInfoRepository;
+import com.profile.security.service.SecurityContextService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ import java.util.List;
 public class ProfileInfoService {
 
     private final ProfileInfoRepository repository;
+    private final SecurityContextService securityContext;
 
     public void saveProfileInfo(ProfileInfoRequest request) {
+        String username = securityContext.getUsername();
         repository.save(ProfileInfoMapper.toEntity(request));
     }
 

@@ -8,8 +8,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping(PathConstant.PROFILE_INFO)
 @RequiredArgsConstructor
@@ -17,6 +20,7 @@ public class ProfileInfoController {
 
     private final ProfileInfoService service;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> saveProfileInfo(@Valid @RequestBody ProfileInfoRequest request) {
         service.saveProfileInfo(request);
@@ -28,6 +32,7 @@ public class ProfileInfoController {
                         .build());
     }
 
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<?> getProfileInfo() {
         return ResponseEntity
@@ -39,6 +44,7 @@ public class ProfileInfoController {
                         .build());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public ResponseEntity<?> updateProfileInfo(@RequestParam("id") Long profileInfoId, @RequestBody ProfileInfoRequest request) {
         service.updateProfileInfo(profileInfoId, request);

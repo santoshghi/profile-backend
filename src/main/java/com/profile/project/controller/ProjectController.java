@@ -4,7 +4,6 @@ import com.profile.common.ApiResponse;
 import com.profile.common.PathConstant;
 import com.profile.project.dto.request.PersonalProjectRequest;
 import com.profile.project.service.ProjectService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
